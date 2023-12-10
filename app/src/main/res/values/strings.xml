@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">JC_GTNBInar_APP</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_re_send_admin">ReSendAdminActivity</string>
+    <string name="title_activity_plans_open">PlansOpenActivity</string>
+    <string name="title_activity_group_open">GroupOpenActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_auth">AuthActivity</string>
+    <string name="title_activity_send">SendActivity</string>
+</resources>
