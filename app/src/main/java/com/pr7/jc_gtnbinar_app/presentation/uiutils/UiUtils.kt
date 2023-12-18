@@ -5,6 +5,7 @@
 )
 
 package com.pr7.jc_gtnbinar_app.presentation.uiutils
+import android.content.Intent
 import android.graphics.drawable.Icon
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -21,6 +22,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -31,6 +33,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -49,9 +54,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -59,12 +67,46 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.pr7.jc_gtnbinar_app.R
 
+
+@Composable
+fun dropDownMenu(expanded:Boolean,onclick: () -> Unit,dismiss: () -> Unit ) {
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { dismiss.invoke() },
+        offset = DpOffset(x = (20).dp, y = (-50).dp),
+        modifier = Modifier.background(Color.White)
+    ) {
+
+        DropdownMenuItem(
+            text = {
+                Row(modifier = Modifier.wrapContentSize(), verticalAlignment = Alignment.CenterVertically) {
+
+                    Icon(
+                        painter = painterResource(id = R.drawable.trash),
+                        contentDescription ="search" ,
+                        modifier = Modifier
+                            .size(35.dp)
+                            .padding(5.dp),
+                        tint =  Color.Red
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    smallTitle(text = "Удалить")
+                }
+            },
+            onClick = {
+                onclick.invoke()
+            }
+        )
+    }
+}
 
 @Composable
 fun customCard(onclick: () -> Unit,color: Color= Color.White,content:@Composable ColumnScope.()->Unit) {
@@ -115,12 +157,13 @@ fun backButton(onclick: () -> Unit) {
 @Composable
 fun customprogressDialog(
 
+    image:Int=R.drawable.checked,
     message: String,
     iconvisible:Boolean,
     clicable:()->Unit
 ) {
 
-    showlogd("dialog invoked ")
+
 
         AlertDialog(
             modifier = Modifier
@@ -139,9 +182,9 @@ fun customprogressDialog(
                 ) {
                     if (iconvisible){
                         Image(
-                            painter = painterResource(id = R.drawable.checked),
+                            painter = painterResource(id = image),
                             contentDescription = "checked",
-                            modifier = Modifier.size(45.dp)
+                            modifier = Modifier.size(55.dp)
                         )
                     }else{
 
@@ -267,7 +310,7 @@ fun customDialog(
                 customButton(onclick = {
                     opendialogd = false
                     confirmButton.invoke(false)
-                    showlogd("confirm clieked")
+
                 }, text = "Да")
 
             },
@@ -278,44 +321,7 @@ fun customDialog(
 }
 
 
-@Composable
-fun customTextfield(
-    text: (String) -> Unit,
-    placeholder: String,
-    keyboardType: KeyboardType = KeyboardType.Text
-) {
-    var textfieldname by remember {
-        mutableStateOf("")
-    }
 
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth()
-            .shadow(15.dp, shape = RectangleShape, spotColor = Color.Blue),
-        value = textfieldname,
-        onValueChange = {
-            textfieldname = it
-            text.invoke(it)
-        },
-        placeholder = { Text(text = placeholder) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Blue,
-            focusedLabelColor = Color.Blue,
-            unfocusedLabelColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent,
-            containerColor = Color.White,
-            focusedTextColor = Color.Black,
-            unfocusedTextColor = Color.Black,
-            cursorColor = Color.Black,
-            unfocusedPlaceholderColor = Color(0xFF868588)
-        ),
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-
-        maxLines = 1,
-        singleLine = true
-        )
-
-}
 
 @Composable
 fun customTextfield2(
@@ -367,6 +373,46 @@ fun customTextfield2(
 
 }
 
+@Composable
+fun customTextField(
+    name:String,
+    text: (String) -> Unit,
+    placeholder: String,
+    keyboardType: KeyboardType = KeyboardType.Text
+) {
+
+    val focusRequester:FocusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(15.dp, shape = RectangleShape, spotColor = Color.Blue),
+        value = name,
+        onValueChange = {
+            text.invoke(it)
+
+        },
+        placeholder = { Text(text = placeholder) },
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = Color.Blue,
+            focusedLabelColor = Color.Blue,
+            unfocusedLabelColor = Color.Transparent,
+            unfocusedBorderColor = Color.Transparent,
+            containerColor = Color.White,
+            focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.Black,
+            cursorColor = Color.Black,
+            unfocusedPlaceholderColor = Color(0xFF868588)
+        ),
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+
+        maxLines = 1,
+        singleLine = true
+    )
+
+}
+
 
 @Composable
 fun largeTitle(text: String) {
@@ -389,8 +435,6 @@ fun mediumTitle(text: String,color: Color= Color.Black) {
         fontFamily = FontFamily(Font(R.font.inter_extrabold)),
         color = color,
         fontWeight = FontWeight.Bold,
-
-
         )
 }
 @Composable
@@ -420,7 +464,7 @@ fun smallTitle(text: String,color: Color= Color.Black) {
 }
 
 @Composable
-fun customButton(onclick: () -> Unit, text: String) {
+fun customButton(text: String,onclick: () -> Unit ) {
 
     Button(
         modifier = Modifier
@@ -511,7 +555,7 @@ fun customButtonPreview() {
         Spacer(modifier = Modifier.height(10.dp))
         smallTitle(text = "Register")
         Spacer(modifier = Modifier.height(10.dp))
-        customTextfield(text = { item -> }, "name")
+
         Spacer(modifier = Modifier.height(10.dp))
 
     }

@@ -1,4 +1,4 @@
-package com.pr7.jc_gtnbinar_app.data.model.remote.response
+package com.pr7.jc_gtnbinar_app.data.model.firebase
 
 class Accept constructor(
     val imageurl:String,

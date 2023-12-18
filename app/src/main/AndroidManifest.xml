@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+
+        android:name=".di.MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -28,7 +31,7 @@
             android:label="@string/title_activity_send"
             android:theme="@style/Theme.JC_GTNBInar_APP" />
         <activity
-            android:name=".presentation.user.authorization.AuthActivity"
+            android:name=".presentation.user.chooseplan.ChooseActivity"
             android:exported="false"
             android:label="@string/title_activity_auth"
             android:theme="@style/Theme.JC_GTNBInar_APP" />
@@ -37,11 +40,7 @@
             android:exported="true"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.JC_GTNBInar_APP">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.user.register.RegisterActivity"
@@ -64,17 +63,24 @@
             android:label="@string/title_activity_re_send_admin"
             android:theme="@style/Theme.JC_GTNBInar_APP" />
         <activity
+
             android:name=".presentation.user.home.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.JC_GTNBInar_APP">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.admin.homeadmin.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.JC_GTNBInar_APP" />
+            android:theme="@style/Theme.JC_GTNBInar_APP" >
+
+        </activity>
     </application>
 
 </manifest>

@@ -94,9 +94,9 @@ fun bottomNavGraphSetup(
 ) {
 
 
-    NavHost(navController = navHostController, startDestination = Screens.HomeAdmin.route ){
-        composable(route = Screens.HomeAdmin.route){ homeScreen() }
-        composable(route = Screens.PlansAdmin.route){ plansAllScreen() }
-        composable(route = Screens.AcceptAdmin.route){ acceptCheckScreen() }
+    NavHost(navController = navHostController, startDestination =  ScreensUser.Home.route ){
+        composable(route = ScreensUser.Home.route){ homeScreen() }
+        composable(route = ScreensUser.Plans.route){ plansAllScreen() }
+        composable(route = ScreensUser.Accept.route){ acceptCheckScreen() }
     }
 }

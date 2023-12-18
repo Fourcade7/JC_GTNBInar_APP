@@ -23,33 +23,29 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.pr7.jc_gtnbinar_app.R
-import com.pr7.jc_gtnbinar_app.data.model.remote.response.Plan
+import com.pr7.jc_gtnbinar_app.data.model.firebase.Plan
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customCard
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.largeTitle
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.mediumTitle
-import com.pr7.jc_gtnbinar_app.presentation.uiutils.showlogd
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.smallTitle
 import com.pr7.jc_gtnbinar_app.presentation.user.plansopen.PlansOpenActivity
-import com.pr7.jc_gtnbinar_app.presentation.user.send.SendActivity
+import com.pr7.jc_gtnbinar_app.presentation.user.viewmodels.HomeViewModel
 
 
 @Composable
 fun homeScreen(){
+
+    val homeViewModel:HomeViewModel= hiltViewModel()
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -58,13 +54,13 @@ fun homeScreen(){
         Column(modifier = Modifier.padding(15.dp)) {
             Row {
                 Spacer(modifier = Modifier.weight(1f))
-                smallTitle(text = "Имя Фамилия")
+                smallTitle(text = homeViewModel.userdata)
             }
             largeTitle(text = "Мои тарифы")
             Spacer(modifier = Modifier.height(10.dp))
             mediumTitle(text = "Тарифы")
             Box(modifier = Modifier.fillMaxSize()){
-                plansHomeScreen()
+               // plansHomeScreen()
 
 
 
@@ -143,7 +139,7 @@ private fun  plansHomeScreen(){
 @Composable
 private fun plansItem(plan: Plan) {
     val context= LocalContext.current
-    var size by remember { mutableStateOf(IntSize.Zero) }
+
     Column {
 
         customCard(onclick = {
@@ -151,10 +147,7 @@ private fun plansItem(plan: Plan) {
         }) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .onSizeChanged {
-                        size = it
-                    },
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ){
                 Image(
@@ -162,35 +155,39 @@ private fun plansItem(plan: Plan) {
                     contentDescription ="bg1",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(80.dp),
+                        .height(75.dp),
                     contentScale = ContentScale.Crop
                 )
-                showlogd("Box size: ${size.height}")
+
                 Row (modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     Image(
                         painter = painterResource(id = R.drawable.gtn) ,
                         contentDescription = "gtn",
+
                         modifier = Modifier
-                            .size(55.dp)
-                            .border(width = 0.dp, shape = CircleShape, color = Color.White)
-                    )
+                            .size(50.dp)
+                            .clip(CircleShape)
+                            .border(width = 1.dp, shape = CircleShape, color = Color.White),
+
+
+                        )
                     Spacer(modifier = Modifier.width(10.dp))
-                    mediumTitle(text = plan.name, Color.White)
-                    Spacer(modifier = Modifier.weight(1f))
                     Column(horizontalAlignment = Alignment.End) {
                         smallTitle(text = "${plan.price} GTN",Color.White)
-                        Spacer(modifier = Modifier.height(15.dp))
+                        Column(Modifier.fillMaxWidth()) {
+                            mediumTitle(text = plan.name!!, Color.White)
+                        }
                         Row (verticalAlignment = Alignment.CenterVertically){
                             smallTitle(text = "Пользователи : 744",Color.White)
                             Spacer(modifier = Modifier.width(8.dp))
                             Icon(
                                 painter = painterResource(id = R.drawable.group),
                                 contentDescription = "group",
-                                modifier = Modifier.size(24.dp),
+                                modifier = Modifier.size(22.dp),
                                 tint = Color.White
                             )
 

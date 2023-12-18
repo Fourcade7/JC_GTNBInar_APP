@@ -23,6 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.pr7.jc_gtnbinar_app.presentation.admin.viewmodels.HomeAdminViewModel
 
 
 @Composable
@@ -95,7 +96,7 @@ fun adminbottomNavGraphSetup(
 
     NavHost(navController = navHostController, startDestination = Screens.HomeAdmin.route ){
         composable(route = Screens.HomeAdmin.route){ homeAdminScreen() }
-        composable(route = Screens.PlansAdmin.route){ plansAdminScreen() }
+        composable(route = Screens.PlansAdmin.route){ plansAdminScreen(navHostController) }
         composable(route = Screens.AcceptAdmin.route){ acceptAdminScreen() }
     }
 }

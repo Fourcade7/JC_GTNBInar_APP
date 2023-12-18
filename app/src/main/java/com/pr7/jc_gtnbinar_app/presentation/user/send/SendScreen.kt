@@ -29,13 +29,13 @@ import com.pr7.jc_gtnbinar_app.R
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.backButton
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customButton
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customCard
-import com.pr7.jc_gtnbinar_app.presentation.uiutils.customTextfield
+
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customTextfield2
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customprogressDialog
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.largeTitle
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.mediumTitle
 import com.pr7.jc_gtnbinar_app.presentation.user.home.HomeActivity
-import com.pr7.jc_gtnbinar_app.presentation.user.register.RegisterActivity
+
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

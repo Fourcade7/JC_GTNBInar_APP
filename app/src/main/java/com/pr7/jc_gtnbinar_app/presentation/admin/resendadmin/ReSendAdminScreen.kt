@@ -29,19 +29,20 @@ import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.pr7.jc_gtnbinar_app.R
+
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.backButton
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customButton
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customCard
-import com.pr7.jc_gtnbinar_app.presentation.uiutils.customTextfield
+import com.pr7.jc_gtnbinar_app.presentation.uiutils.customTextField
+
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customprogressDialog
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.largeTitle
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.mediumTitle
-import com.pr7.jc_gtnbinar_app.presentation.uiutils.showlogd
+
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -84,7 +85,7 @@ fun reSendAdminScreen() {
             Spacer(modifier = Modifier.height(10.dp))
             mediumTitle(text = "User id")
             Spacer(modifier = Modifier.height(10.dp))
-            customTextfield(text = { name=it }, placeholder ="id:aosdeiruy239487" )
+            customTextField(name,text = { name=it }, placeholder ="id:aosdeiruy239487" )
             Spacer(modifier = Modifier.height(15.dp))
             mediumTitle(text = "Подтверждение об оплате")
             Spacer(modifier = Modifier.height(10.dp))
@@ -99,7 +100,7 @@ fun reSendAdminScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(15.dp))
-            customButton(onclick = { launcher.launch("image/*")}, text = "Добавить фото")
+            customButton(text = "Добавить фото") { launcher.launch("image/*")}
             Spacer(modifier = Modifier.height(10.dp))
             customButton(onclick = { opendialog=true }, text = "Отправлять")
 

@@ -1,4 +1,4 @@
-package com.pr7.jc_gtnbinar_app.presentation.user.authorization.ui.theme
+package com.pr7.jc_gtnbinar_app.presentation.user.chooseplan.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

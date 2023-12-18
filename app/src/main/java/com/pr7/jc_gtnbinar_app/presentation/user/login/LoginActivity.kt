@@ -13,7 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.statusbarcolorchange
 import com.pr7.jc_gtnbinar_app.presentation.user.login.ui.theme.JC_GTNBInar_APPTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

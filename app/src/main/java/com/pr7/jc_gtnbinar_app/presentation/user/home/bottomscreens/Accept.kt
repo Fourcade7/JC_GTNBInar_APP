@@ -1,6 +1,5 @@
 package com.pr7.jc_gtnbinar_app.presentation.user.home.bottomscreens
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -31,13 +29,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pr7.jc_gtnbinar_app.R
-import com.pr7.jc_gtnbinar_app.data.model.remote.response.Accept
-import com.pr7.jc_gtnbinar_app.presentation.admin.resendadmin.ReSendAdminActivity
+import com.pr7.jc_gtnbinar_app.data.model.firebase.Accept
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.customCard
-import com.pr7.jc_gtnbinar_app.presentation.uiutils.greenButton
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.largeTitle
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.mediumTitle
-import com.pr7.jc_gtnbinar_app.presentation.uiutils.redButton
 import com.pr7.jc_gtnbinar_app.presentation.uiutils.smallTitle
 
 
@@ -58,7 +53,7 @@ fun acceptCheckScreen() {
             Spacer(modifier = Modifier.height(15.dp))
             mediumTitle(text = "Новые пользователи")
             Spacer(modifier = Modifier.height(10.dp))
-            acceptScreen()
+            //acceptScreen()
 
             //customDialog(opendialog, title = "Pr", text = "Загрузка...", confirmButton = {opendialog = it})
             //customprogressDialog(opendialog = opendialog, title = "Pr", text ="Loading..." , confirmButton ={opendialog=it} )
