@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-
+        android:usesCleartextTraffic="true"
         android:name=".di.MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,9 +27,11 @@
             android:theme="@style/Theme.JC_GTNBInar_APP" />
         <activity
             android:name=".presentation.user.send.SendActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_send"
-            android:theme="@style/Theme.JC_GTNBInar_APP" />
+            android:theme="@style/Theme.JC_GTNBInar_APP" >
+
+        </activity>
         <activity
             android:name=".presentation.user.chooseplan.ChooseActivity"
             android:exported="false"
@@ -68,6 +70,7 @@
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.JC_GTNBInar_APP">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

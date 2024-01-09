@@ -1,22 +1,25 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
+    //id("com.google.gms.google-services")
 
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id ("kotlin-parcelize")
+
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.pr7.jc_gtnbinar_app"
+    namespace = "com.pr7.jc_gtnbinar_appforupload"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pr7.jc_gtnbinar_app"
+        applicationId = "com.pr7.jc_gtnbinar_appforupload"
         minSdk = 28
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -108,6 +111,7 @@ dependencies {
 
     //Navigation
     val nav_version = "2.7.5"
+    //noinspection GradleDependency
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
 
@@ -115,7 +119,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
 
     //dagger hilt
-    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     //hiltviewmodel
@@ -123,9 +127,28 @@ dependencies {
 
 
     //Compose runtime livedata
-    implementation ("androidx.compose.runtime:runtime:1.5.1")
-    implementation ("androidx.compose.runtime:runtime-livedata:1.5.1")
+    implementation ("androidx.compose.runtime:runtime:1.5.4")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
 
     //Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation ("org.conscrypt:conscrypt-android:2.2.1")
+
+
+    //retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //chuck
+    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+
+    // optional - Jetpack Compose integration
+    val paging_version = "3.2.1"
+
+    implementation("androidx.paging:paging-runtime-ktx:$paging_version")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+
 }
